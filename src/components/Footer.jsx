@@ -73,6 +73,11 @@ export default function Footer() {
                   </a>
                 </li>
               ))}
+              <li>
+                <a href="#resume" className="text-muted transition-colors hover:text-fg">
+                  {t.ui.resumeEyebrow}
+                </a>
+              </li>
             </ul>
           </div>
 
