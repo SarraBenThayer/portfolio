@@ -29,6 +29,7 @@ export const content = {
       skills: 'Skills',
       education: 'Education',
       activities: 'Activities',
+      resume: 'Resume',
       contact: 'Contact',
     },
     hero: {
@@ -235,17 +236,13 @@ export const content = {
         short: 'Real-time Kafka + Spark pipeline analyzing social media sentiment, hashtags and trends.',
         summary:
           'Streaming pipeline ingesting social media posts in real time for sentiment analysis, hashtag tracking and trend statistics.',
-        flow: {
-          title: 'social_stream.run()',
-          status: 'streaming',
-          steps: [
-            { name: 'Kafka ingestion' },
-            { name: 'Spark processing' },
-            { name: 'Redis cache' },
-            { name: 'PostgreSQL storage' },
-            { name: 'Flask API & dashboard' },
-          ],
-        },
+        architecture: [
+          { layer: "Ingestion", items: ["Apache Kafka","Social media posts"] },
+          { layer: "Processing", items: ["Apache Spark","Sentiment analysis","Hashtag tracking","Time windows"] },
+          { layer: "Storage", items: ["Redis (cache)","PostgreSQL"] },
+          { layer: "Serving", items: ["Flask APIs","Interactive dashboard"] },
+        ],
+        architectureNote: "All services run in Docker containers.",
         workflow: [
           { title: 'Real-time ingestion', text: 'Social media posts are streamed into Kafka in real time.' },
           {
@@ -265,17 +262,12 @@ export const content = {
         short: 'Streaming lakehouse turning simulated sales events into live Power BI KPIs.',
         summary:
           'End-to-end streaming lakehouse: Kafka ingestion, Spark Structured Streaming and Delta Lake medallion architecture feeding Power BI.',
-        flow: {
-          title: 'sales_lakehouse.run()',
-          status: 'streaming',
-          steps: [
-            { name: 'Kafka producer' },
-            { name: 'Spark Structured Streaming' },
-            { name: 'Bronze layer (Delta Lake)' },
-            { name: 'Silver layer (Delta Lake)' },
-            { name: 'Power BI dashboard' },
-          ],
-        },
+        architecture: [
+          { layer: "Source", items: ["Kafka producer","Simulated sales"] },
+          { layer: "Processing", items: ["Spark Structured Streaming","PySpark","Watermarking"] },
+          { layer: "Lakehouse", items: ["Delta Lake Bronze","Delta Lake Silver","ACID · Time travel"] },
+          { layer: "Business intelligence", items: ["Power BI","KPIs"] },
+        ],
         workflow: [
           { title: 'Event generation', text: 'A Python Kafka producer simulates realistic sales transactions in real time.' },
           {
@@ -379,6 +371,27 @@ export const content = {
         ],
         tags: ['Python', 'Streamlit', 'Gemini 1.5 Flash', 'SBERT', 'scikit-learn', 'Jaccard', 'pdf2image', 'Altair', 'NLP'],
       },
+      {
+        id: 'legal-document-classification',
+        title: 'Legal Document Classification',
+        subtitle: 'End-of-year project · 2025',
+        short: 'BERT models fine-tuned on 500 legal PDFs and compared in Power BI, with Legal-BERT performing best.',
+        summary:
+          'Automatic legal document classification system built by fine-tuning BERT models, including Legal-BERT, with a Power BI dashboard to compare their performance.',
+        architecture: [
+          { layer: "Data", items: ["500 text-based PDFs","Contracts","Legal documents"] },
+          { layer: "Models", items: ["Legal-BERT","Other BERT models","Fine-tuning"] },
+          { layer: "Evaluation", items: ["F1-score","Accuracy","Training settings"] },
+          { layer: "Visualization", items: ["Power BI","Model comparison"] },
+        ],
+        workflow: [
+          { title: 'Document corpus', text: '500 text-based PDF files covering different types of contracts and legal documents.' },
+          { title: 'BERT models fine-tuning', text: 'Several BERT models, including Legal-BERT, are fine-tuned on the corpus with different training settings.' },
+          { title: 'Document classification', text: 'The fine-tuned models assign each document to its category.' },
+          { title: 'Power BI model comparison', text: 'A Power BI dashboard shows F1-score, accuracy and other metrics by BERT model and training settings; Legal-BERT performed best.' },
+        ],
+        tags: ['Legal-BERT', 'Fine-tuning', 'NLP', 'Text classification', 'Power BI'],
+      },
     ],
     skills: [
       { group: 'Artificial Intelligence', items: ['ML', 'DL', 'LLMs', 'NLP', 'Generative AI', 'LSTM', 'Knowledge Graphs', 'BERT', 'SBERT', 'Gemini', 'XGBoost'] },
@@ -424,7 +437,6 @@ export const content = {
       diagram: 'Architecture diagram',
       workflow: 'How it works, step by step',
       enlarge: 'Click to enlarge',
-      resumeEyebrow: 'Resume',
       resumeTitle: 'My resume',
       resumeSub: 'Read it right here, or download the PDF.',
       openCv: 'Open in a new tab',
@@ -466,6 +478,7 @@ export const content = {
       skills: 'Compétences',
       education: 'Formation',
       activities: 'Activités',
+      resume: 'CV',
       contact: 'Contact',
     },
     hero: {
@@ -672,17 +685,13 @@ export const content = {
         short: 'Pipeline temps réel Kafka + Spark analysant le sentiment, les hashtags et les tendances des réseaux sociaux.',
         summary:
           "Pipeline de streaming ingérant des publications de réseaux sociaux en temps réel pour l'analyse de sentiment, le suivi des hashtags et les statistiques de tendances.",
-        flow: {
-          title: 'social_stream.run()',
-          status: 'streaming',
-          steps: [
-            { name: 'Ingestion Kafka' },
-            { name: 'Traitement Spark' },
-            { name: 'Cache Redis' },
-            { name: 'Stockage PostgreSQL' },
-            { name: 'API Flask & tableau de bord' },
-          ],
-        },
+        architecture: [
+          { layer: "Ingestion", items: ["Apache Kafka","Publications sociales"] },
+          { layer: "Traitement", items: ["Apache Spark","Analyse de sentiment","Suivi des hashtags","Fenêtres temporelles"] },
+          { layer: "Stockage", items: ["Redis (cache)","PostgreSQL"] },
+          { layer: "Restitution", items: ["APIs Flask","Tableau de bord interactif"] },
+        ],
+        architectureNote: "Tous les services tournent dans des conteneurs Docker.",
         workflow: [
           { title: 'Ingestion temps réel', text: 'Les publications des réseaux sociaux sont ingérées en temps réel dans Kafka.' },
           {
@@ -702,17 +711,12 @@ export const content = {
         short: 'Lakehouse de streaming qui transforme des ventes simulées en KPI Power BI en temps réel.',
         summary:
           'Lakehouse de streaming de bout en bout : ingestion Kafka, Spark Structured Streaming et architecture médaillon Delta Lake alimentant Power BI.',
-        flow: {
-          title: 'sales_lakehouse.run()',
-          status: 'streaming',
-          steps: [
-            { name: 'Producteur Kafka' },
-            { name: 'Spark Structured Streaming' },
-            { name: 'Couche Bronze (Delta Lake)' },
-            { name: 'Couche Silver (Delta Lake)' },
-            { name: 'Tableau de bord Power BI' },
-          ],
-        },
+        architecture: [
+          { layer: "Source", items: ["Producteur Kafka","Ventes simulées"] },
+          { layer: "Traitement", items: ["Spark Structured Streaming","PySpark","Watermarking"] },
+          { layer: "Lakehouse", items: ["Delta Lake Bronze","Delta Lake Silver","ACID · Time travel"] },
+          { layer: "Décisionnel", items: ["Power BI","KPI"] },
+        ],
         workflow: [
           { title: 'Génération des événements', text: 'Un producteur Kafka en Python simule des transactions de vente réalistes en temps réel.' },
           {
@@ -816,6 +820,27 @@ export const content = {
         ],
         tags: ['Python', 'Streamlit', 'Gemini 1.5 Flash', 'SBERT', 'scikit-learn', 'Jaccard', 'pdf2image', 'Altair', 'NLP'],
       },
+      {
+        id: 'legal-document-classification',
+        title: 'Classification de documents juridiques',
+        subtitle: "Projet de fin d'année · 2025",
+        short: "Modèles BERT fine-tunés sur 500 PDF juridiques et comparés sur Power BI, Legal-BERT obtenant les meilleurs résultats.",
+        summary:
+          'Système de classification automatique de documents juridiques par fine-tuning de modèles BERT, dont Legal-BERT, avec un tableau de bord Power BI pour comparer leurs performances.',
+        architecture: [
+          { layer: "Données", items: ["500 PDF textuels","Contrats","Documents juridiques"] },
+          { layer: "Modèles", items: ["Legal-BERT","Autres modèles BERT","Fine-tuning"] },
+          { layer: "Évaluation", items: ["F1-score","Accuracy","Paramètres d'entraînement"] },
+          { layer: "Visualisation", items: ["Power BI","Comparaison des modèles"] },
+        ],
+        workflow: [
+          { title: 'Corpus de documents', text: '500 fichiers PDF textuels couvrant différents types de contrats et de documents juridiques.' },
+          { title: 'Fine-tuning des modèles BERT', text: "Plusieurs modèles BERT, dont Legal-BERT, sont fine-tunés sur le corpus avec différents paramètres d'entraînement." },
+          { title: 'Classification des documents', text: 'Les modèles fine-tunés attribuent à chaque document sa catégorie.' },
+          { title: 'Comparaison sur Power BI', text: "Un tableau de bord Power BI présente le F1-score, l'accuracy et d'autres métriques selon le modèle BERT et les paramètres d'entraînement ; Legal-BERT a obtenu les meilleurs résultats." },
+        ],
+        tags: ['Legal-BERT', 'Fine-tuning', 'NLP', 'Classification de texte', 'Power BI'],
+      },
     ],
     skills: [
       { group: 'Intelligence Artificielle', items: ['ML', 'DL', 'LLMs', 'NLP', 'IA Générative', 'LSTM', 'Graphes de connaissances', 'BERT', 'SBERT', 'Gemini', 'XGBoost'] },
@@ -861,7 +886,6 @@ export const content = {
       diagram: "Schéma d'architecture",
       workflow: 'Fonctionnement, étape par étape',
       enlarge: 'Cliquer pour agrandir',
-      resumeEyebrow: 'CV',
       resumeTitle: 'Mon CV',
       resumeSub: 'Consultez-le directement ici, ou téléchargez le PDF.',
       openCv: 'Ouvrir dans un nouvel onglet',

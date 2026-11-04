@@ -10,7 +10,7 @@ export default function Resume({ index }) {
   const src = profile.cv[lang]
 
   return (
-    <Section id="resume" index={index} eyebrow={t.ui.resumeEyebrow} title={t.ui.resumeTitle} subtitle={t.ui.resumeSub}>
+    <Section id="resume" index={index} eyebrow={t.nav.resume} title={t.ui.resumeTitle} subtitle={t.ui.resumeSub}>
       <Reveal>
         <div className="mb-6 flex flex-wrap gap-3">
           <a href={src} download className="btn-primary">
@@ -38,7 +38,7 @@ export default function Resume({ index }) {
           rel="noreferrer"
           className="card flex items-center gap-4 p-5 md:hidden"
         >
-          <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-ocean/40 text-fg">
+          <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-orchid text-ink">
             <FileText size={22} />
           </span>
           <span className="text-sm text-muted">{t.ui.resumeMobile}</span>

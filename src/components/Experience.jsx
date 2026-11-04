@@ -50,7 +50,7 @@ function ConfidentialBadge({ t }) {
   return (
     <span
       title={t.ui.confidentialHint}
-      className="inline-flex items-center gap-1.5 rounded-full border border-coral/60 bg-coral/15 px-3 py-1.5 font-mono text-xs text-fg"
+      className="inline-flex items-center gap-1.5 rounded-full border border-orchid/60 bg-orchid/15 px-3 py-1.5 font-mono text-xs text-fg"
     >
       <Lock size={12} />
       {t.ui.confidential}
@@ -164,7 +164,7 @@ function ExperienceModal({ job, index, t, onClose }) {
               {job.points.map((p, i) => (
                 <li key={p.label} className="relative">
                   <span
-                    className={`absolute -left-14 top-0 flex h-10 w-10 items-center justify-center rounded-full font-display text-sm font-bold text-fg ring-4 ring-panel ${
+                    className={`absolute -left-14 top-0 flex h-10 w-10 items-center justify-center rounded-full font-display text-sm font-bold text-ink ring-4 ring-panel ${
                       tone(i).solid
                     }`}
                   >
@@ -242,7 +242,7 @@ function ExperienceCard({ job, index, t, onOpen }) {
               {job.delivered.map((d, i) => (
                 <li key={d} className="flex gap-4">
                   <span
-                    className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-fg ${tone(i).soft}`}
+                    className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${tone(i).soft}`}
                   >
                     <Sparkles size={15} />
                   </span>
@@ -259,7 +259,7 @@ function ExperienceCard({ job, index, t, onOpen }) {
               <Label>{t.ui.strengths}</Label>
               <div className="mt-6 flex flex-wrap gap-2.5">
                 {job.strengths.map((s, i) => (
-                  <span key={s} className={`rounded-full px-4 py-2 text-sm font-medium text-fg ${tone(i).soft}`}>
+                  <span key={s} className={`rounded-full px-4 py-2 text-sm font-medium ${tone(i).soft}`}>
                     {s}
                   </span>
                 ))}
@@ -269,7 +269,7 @@ function ExperienceCard({ job, index, t, onOpen }) {
 
           <button
             onClick={() => onOpen(index)}
-            className={`mt-10 inline-flex w-fit items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-fg transition-all hover:gap-3 lg:mt-auto ${c.soft}`}
+            className={`mt-10 inline-flex w-fit items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all hover:gap-3 lg:mt-auto ${c.soft}`}
           >
             {t.ui.seeDetails}
             <ArrowRight size={16} />
@@ -291,7 +291,7 @@ export default function Experience({ index }) {
         {t.experience.map((job, i) => (
           <li key={job.id} className="relative">
             <span
-              className={`absolute -left-[2.05rem] top-9 flex h-8 w-8 items-center justify-center rounded-full text-fg ring-4 ring-bg sm:-left-[4.05rem] ${
+              className={`absolute -left-[2.05rem] top-9 flex h-8 w-8 items-center justify-center rounded-full text-ink ring-4 ring-bg sm:-left-[4.05rem] ${
                 tone(i).solid
               }`}
             >

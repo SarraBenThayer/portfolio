@@ -20,9 +20,9 @@ export default function PipelineCard({ data, icons = DEFAULT_ICONS }) {
       {/* window header */}
       <div className="mb-5 flex items-center justify-between gap-3">
         <div className="flex items-center gap-1.5">
-          <span className="h-2.5 w-2.5 rounded-full bg-coral" />
-          <span className="h-2.5 w-2.5 rounded-full bg-mustard" />
-          <span className="h-2.5 w-2.5 rounded-full bg-ocean" />
+          <span className="h-2.5 w-2.5 rounded-full bg-orchid" />
+          <span className="h-2.5 w-2.5 rounded-full bg-peach" />
+          <span className="h-2.5 w-2.5 rounded-full bg-pistachio" />
         </div>
         <span className="truncate font-mono text-xs text-faint">{data.title}</span>
         <span className="flex shrink-0 items-center gap-1.5 font-mono text-xs text-accent">
@@ -38,7 +38,7 @@ export default function PipelineCard({ data, icons = DEFAULT_ICONS }) {
         {/* vertical connector */}
         <span className="absolute bottom-6 left-[1.4rem] top-6 w-px bg-line" aria-hidden />
         <motion.span
-          className="absolute left-[1.4rem] w-0.5 -translate-x-[0.5px] bg-gradient-to-b from-ocean via-mustard to-coral"
+          className="absolute left-[1.4rem] w-0.5 -translate-x-[0.5px] bg-gradient-to-b from-pistachio via-peach to-orchid"
           style={{ top: '1.5rem' }}
           animate={{ height: `${(active / (data.steps.length - 1)) * 100}%` }}
           transition={{ duration: 0.6, ease: 'easeInOut' }}
@@ -61,7 +61,7 @@ export default function PipelineCard({ data, icons = DEFAULT_ICONS }) {
               <span className="relative z-10 h-10 w-10 shrink-0 rounded-lg bg-panel">
                 <span
                   className={`flex h-full w-full items-center justify-center rounded-lg border transition-colors duration-500 ${
-                    isActive || isDone ? `${c.border} ${c.soft} text-fg` : 'border-line text-faint'
+                    isActive || isDone ? `${c.border} ${c.soft}` : 'border-line text-faint'
                   }`}
                 >
                   <Icon size={18} />

@@ -11,7 +11,7 @@ const rowClass =
 
 function IconBox({ Icon, i = 0 }) {
   return (
-    <span className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-fg ${tone(i).soft}`}>
+    <span className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ${tone(i).soft}`}>
       <Icon size={18} />
     </span>
   )
@@ -30,7 +30,7 @@ export default function Contact({ index }) {
     <Section id="contact" index={index} eyebrow={t.nav.contact} title={t.ui.contactTitle} subtitle={t.contact.text}>
       <div className="grid gap-6 lg:grid-cols-[1fr_1.4fr]">
         <Reveal className="card relative p-6 sm:p-8">
-          <div className="pointer-events-none absolute -left-16 -top-16 h-48 w-48 rounded-full bg-ocean/25 blur-3xl" aria-hidden />
+          <div className="pointer-events-none absolute -left-16 -top-16 h-48 w-48 rounded-full bg-peach/50 blur-3xl dark:bg-orchid/25" aria-hidden />
           <div className="relative space-y-2">
             <EmailMenu className={rowClass} ariaLabel={t.ui.copyEmail}>
               <IconBox Icon={Mail} />

@@ -10,8 +10,8 @@ import Footer, { BackToTop } from './components/Footer'
 import Resume from './components/Resume'
 
 // Page order — section numbers (01, 02…) follow this list automatically.
-// Keep in sync with SECTIONS in Navbar.jsx (Resume is reachable from the footer).
-const SECTIONS = [About, Education, Experience, Projects, Skills, Activities, Contact, Resume]
+// Keep in sync with SECTIONS in Navbar.jsx.
+const SECTIONS = [About, Education, Experience, Projects, Skills, Activities, Resume, Contact]
 
 export default function App() {
   return (

@@ -3,41 +3,29 @@ import { AnimatePresence, motion } from 'framer-motion'
 import {
   Activity,
   ArrowRight,
-  Binary,
   BrainCircuit,
   Check,
-  Container,
-  Cpu,
-  Database,
   ExternalLink,
   FileSearch,
-  FileText,
-  GitBranch,
   Github,
-  Layers,
-  LayoutDashboard,
   Maximize2,
-  MessageSquare,
   Radio,
-  Rocket,
   Scale,
-  Server,
-  Sparkles,
   TrendingUp,
   X,
-  Zap,
 } from 'lucide-react'
 import { usePreferences } from '../context/Preferences'
 import Section, { Reveal, Tag } from './Section'
-import PipelineCard from './PipelineCard'
+import ArchitectureMap from './ArchitectureMap'
 import { tone } from '../palette'
 
-// Header icon + one icon per architecture step, per project id
+// Header icon per project id
 const PROJECT_ICONS = {
-  'social-media-analytics': { main: Radio, flow: [Radio, Cpu, Zap, Database, LayoutDashboard] },
-  'sales-streaming': { main: Activity, flow: [Server, Cpu, Layers, Layers, TrendingUp] },
-  'mlops-pipeline': { main: BrainCircuit, flow: [GitBranch, Database, Rocket, Container, Activity] },
-  'ats-resume-filtering': { main: FileSearch, flow: [FileText, Sparkles, Binary, Scale, MessageSquare] },
+  'social-media-analytics': { main: Radio },
+  'sales-streaming': { main: Activity },
+  'mlops-pipeline': { main: BrainCircuit },
+  'ats-resume-filtering': { main: FileSearch },
+  'legal-document-classification': { main: Scale },
 }
 
 const MAX_CARD_TAGS = 4
@@ -59,7 +47,7 @@ function ProjectCard({ project, index, t, onOpen }) {
         <span className={`absolute inset-x-0 top-0 h-1.5 ${c.solid}`} aria-hidden />
 
         <div className="flex items-center justify-between">
-          <span className={`flex h-12 w-12 items-center justify-center rounded-xl text-fg ${c.soft}`}>
+          <span className={`flex h-12 w-12 items-center justify-center rounded-xl ${c.soft}`}>
             <Main size={22} />
           </span>
           <span className={`rounded-full px-3 py-1 font-mono text-xs text-fg ${c.tint}`}>
@@ -68,6 +56,7 @@ function ProjectCard({ project, index, t, onOpen }) {
         </div>
 
         <h3 className="mt-6 font-display text-xl font-bold leading-snug tracking-tight sm:text-2xl">{project.title}</h3>
+        {project.subtitle && <p className="mt-2 font-mono text-sm text-faint">{project.subtitle}</p>}
         <p className="mt-3 leading-relaxed text-muted">{project.short || project.summary}</p>
 
         <div className="mt-5 flex flex-wrap gap-2">
@@ -80,7 +69,7 @@ function ProjectCard({ project, index, t, onOpen }) {
         <div className="mt-auto pt-7">
           <button
             onClick={() => onOpen(index)}
-            className={`inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold text-fg transition-all hover:gap-3 ${c.soft}`}
+            className={`inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-all hover:gap-3 ${c.soft}`}
           >
             {t.ui.seeMore}
             <ArrowRight size={16} />
@@ -182,7 +171,7 @@ function ProjectModal({ project, index, t, onClose }) {
         <div className="px-6 pb-10 pt-8 sm:px-14 sm:pb-14 sm:pt-12 xl:px-20">
           {/* header */}
           <div className="flex items-center gap-4 pr-12">
-            <span className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl text-fg ${c.soft}`}>
+            <span className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl ${c.soft}`}>
               <Main size={24} />
             </span>
             <span className={`rounded-full px-3 py-1 font-mono text-xs text-fg ${c.tint}`}>
@@ -195,6 +184,7 @@ function ProjectModal({ project, index, t, onClose }) {
           >
             {project.title}
           </h3>
+          {project.subtitle && <p className="mt-2 font-mono text-sm text-faint">{project.subtitle}</p>}
 
           {/* overview */}
           <section className="mt-12">
@@ -218,12 +208,12 @@ function ProjectModal({ project, index, t, onClose }) {
             </section>
           )}
 
-          {/* architecture — full width, centered */}
-          {project.flow && (
+          {/* component map: what the system is made of */}
+          {project.architecture && (
             <section className="mt-14">
               <Label>{t.ui.architecture}</Label>
-              <div className="mx-auto mt-6 max-w-2xl">
-                <PipelineCard data={project.flow} {...(icons.flow ? { icons: icons.flow } : {})} />
+              <div className="mt-6">
+                <ArchitectureMap layers={project.architecture} note={project.architectureNote} />
               </div>
             </section>
           )}
@@ -237,7 +227,7 @@ function ProjectModal({ project, index, t, onClose }) {
                 {project.workflow.map((step, i) => (
                   <li key={step.title} className="relative">
                     <span
-                      className={`absolute -left-14 top-0 flex h-10 w-10 items-center justify-center rounded-full font-display text-sm font-bold text-fg ring-4 ring-panel ${
+                      className={`absolute -left-14 top-0 flex h-10 w-10 items-center justify-center rounded-full font-display text-sm font-bold text-ink ring-4 ring-panel ${
                         tone(i).solid
                       }`}
                     >
@@ -260,7 +250,7 @@ function ProjectModal({ project, index, t, onClose }) {
               <ul className="mt-6 grid gap-4 sm:grid-cols-2">
                 {project.points.map((p) => (
                   <li key={p} className="flex gap-4 rounded-2xl border border-line bg-bg/50 p-5 leading-relaxed text-muted">
-                    <span className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-lg text-fg ${c.soft}`}>
+                    <span className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-lg ${c.soft}`}>
                       <Check size={15} />
                     </span>
                     <span className="pt-0.5">{p}</span>

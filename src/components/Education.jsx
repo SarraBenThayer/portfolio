@@ -6,7 +6,7 @@ import { tone } from '../palette'
 function Item({ icon: Icon, title, subtitle, period, i = 0 }) {
   return (
     <li className="flex gap-4 border-b border-line pb-5 last:border-0 last:pb-0">
-      <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-fg ${tone(i).soft}`}>
+      <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${tone(i).soft}`}>
         <Icon size={18} />
       </span>
       <div className="min-w-0 flex-1">

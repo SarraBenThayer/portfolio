@@ -16,11 +16,12 @@ export default {
         accent: token('accent'),
         'accent-2': token('accent-2'),
         // Raw palette — decorative use (fills, rings, glows, gradients)
-        ocean: '#749FB8',
-        coral: '#DF9780',
-        lagoon: '#6CB8B0',
-        mustard: '#E8B952',
-        mist: '#DBDCDE', // neutral grey for tags
+        plum: '#493657',
+        orchid: '#CE7DA5',
+        pistachio: '#BEE5BF',
+        mint: '#DFF3E3',
+        peach: '#FFD1BA',
+        ink: '#2B1F35', // deeper plum: text on colored fills
       },
       fontFamily: {
         sans: ['"Inter"', 'ui-sans-serif', 'system-ui', 'sans-serif'],

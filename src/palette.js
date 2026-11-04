@@ -1,38 +1,31 @@
 // Palette tones cycled across the page so every color shows up.
 // Class names are written out in full so Tailwind can detect them.
-// `soft` boxes hold dark text/icons (readable in both themes).
+// `soft` is an opaque fill that sets its own dark text (readable in both themes);
+// `tint` is an outlined wash meant to hold `text-fg`.
 export const TONES = [
   {
-    soft: 'bg-ocean/40',
-    tint: 'bg-ocean/15',
-    solid: 'bg-ocean',
-    border: 'border-ocean',
-    borderSoft: 'border-ocean/60',
-    hoverBorder: 'hover:border-ocean',
+    soft: 'bg-orchid text-ink',
+    tint: 'border border-orchid/70 bg-orchid/10',
+    solid: 'bg-orchid',
+    border: 'border-orchid',
+    borderSoft: 'border-orchid/70',
+    hoverBorder: 'hover:border-orchid',
   },
   {
-    soft: 'bg-mustard/45',
-    tint: 'bg-mustard/15',
-    solid: 'bg-mustard',
-    border: 'border-mustard',
-    borderSoft: 'border-mustard/70',
-    hoverBorder: 'hover:border-mustard',
+    soft: 'bg-pistachio text-ink',
+    tint: 'border border-pistachio/70 bg-pistachio/10',
+    solid: 'bg-pistachio',
+    border: 'border-pistachio',
+    borderSoft: 'border-pistachio/80',
+    hoverBorder: 'hover:border-pistachio',
   },
   {
-    soft: 'bg-lagoon/55',
-    tint: 'bg-lagoon/20',
-    solid: 'bg-lagoon',
-    border: 'border-lagoon',
-    borderSoft: 'border-lagoon/80',
-    hoverBorder: 'hover:border-lagoon',
-  },
-  {
-    soft: 'bg-coral/45',
-    tint: 'bg-coral/15',
-    solid: 'bg-coral',
-    border: 'border-coral',
-    borderSoft: 'border-coral/70',
-    hoverBorder: 'hover:border-coral',
+    soft: 'bg-peach text-ink',
+    tint: 'border border-peach/70 bg-peach/10',
+    solid: 'bg-peach',
+    border: 'border-peach',
+    borderSoft: 'border-peach/80',
+    hoverBorder: 'hover:border-peach',
   },
 ]
 

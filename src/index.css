@@ -3,29 +3,30 @@
 @tailwind utilities;
 
 /* Color tokens (RGB triplets so Tailwind opacity modifiers work) */
-/* Palette: #749FB8 ocean · #DF9780 coral · #6CB8B0 lagoon · #E8B952 mustard (+ #DBDCDE mist for tags)
-   Light mode uses deeper lagoon / ocean for accent TEXT so it stays readable on cream;
-   the raw palette is used for fills, rings, glows and gradients (see tailwind.config.js). */
+/* Palette: #493657 plum · #CE7DA5 orchid · #BEE5BF pistachio · #DFF3E3 mint · #FFD1BA peach
+   Raw orchid is too light for small text on light backgrounds (2.9:1), so light mode
+   uses a deeper orchid for accent TEXT; the raw palette is used for fills, rings,
+   glows and gradients (see tailwind.config.js). */
 :root {
-  --bg: 255 247 239;       /* warm cream #FFF7EF */
-  --panel: 255 252 248;
-  --line: 238 222 208;
-  --fg: 38 42 48;          /* ink */
-  --muted: 88 96 106;
-  --faint: 138 144 152;
-  --accent: 44 122 114;    /* deep lagoon — readable on cream */
-  --accent-2: 61 106 133;  /* deep ocean */
+  --bg: 255 247 242;       /* peach white #FFF7F2 */
+  --panel: 255 255 255;
+  --line: 243 224 216;     /* soft peach */
+  --fg: 73 54 87;          /* plum #493657 */
+  --muted: 101 83 115;
+  --faint: 118 102 133;
+  --accent: 154 63 112;    /* deep orchid — readable on peach white */
+  --accent-2: 73 54 87;    /* plum */
 }
 
 .dark {
-  --bg: 27 30 39;          /* #1B1E27 */
-  --panel: 35 39 50;
-  --line: 56 61 75;
-  --fg: 245 240 234;
-  --muted: 196 196 198;
-  --faint: 140 142 150;
-  --accent: 108 184 176;   /* #6CB8B0 lagoon */
-  --accent-2: 116 159 184; /* #749FB8 ocean */
+  --bg: 43 31 53;          /* deep plum #2B1F35 */
+  --panel: 54 40 64;
+  --line: 73 54 87;        /* plum #493657 */
+  --fg: 223 243 227;       /* mint #DFF3E3 */
+  --muted: 201 198 208;
+  --faint: 169 157 181;
+  --accent: 206 125 165;   /* orchid #CE7DA5 */
+  --accent-2: 190 229 191; /* pistachio #BEE5BF */
   color-scheme: dark;
 }
 
@@ -50,13 +51,13 @@
   .text-gradient {
     @apply bg-gradient-to-r from-accent to-accent-2 bg-clip-text text-transparent;
   }
-  /* light: deep coral → deep ocean (large text only) */
+  /* light: deep orchid → plum (large text only) */
   .text-gradient {
-    background-image: linear-gradient(to right, #c0654a, #3d6a85);
+    background-image: linear-gradient(to right, #9a3f70, #493657);
   }
-  /* dark: the raw palette is readable — coral → mustard → lagoon */
+  /* dark: the raw palette is readable — orchid → peach → pistachio */
   .dark .text-gradient {
-    background-image: linear-gradient(to right, #df9780, #e8b952, #6cb8b0);
+    background-image: linear-gradient(to right, #ce7da5, #ffd1ba, #bee5bf);
   }
   .card {
     @apply rounded-2xl border border-line bg-panel/70 backdrop-blur-sm;

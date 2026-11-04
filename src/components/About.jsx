@@ -9,13 +9,13 @@ function Photo() {
     <div className="relative mx-auto w-64 sm:w-72">
       {/* offset outline frame for depth */}
       <div
-        className="absolute inset-0 translate-x-4 translate-y-4 rounded-[2rem] border-2 border-coral/70"
+        className="absolute inset-0 translate-x-4 translate-y-4 rounded-[2rem] border-2 border-orchid/70"
         aria-hidden
       />
       {/* portrait card: the cut-out stands on the bottom edge */}
-      <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-line bg-gradient-to-b from-ocean/60 via-lagoon/35 to-coral/50">
+      <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-line bg-gradient-to-b from-orchid via-orchid/80 to-peach">
         <div
-          className="absolute left-1/2 top-1/4 h-48 w-48 -translate-x-1/2 rounded-full bg-mustard/40 blur-3xl"
+          className="absolute left-1/2 top-1/4 h-48 w-48 -translate-x-1/2 rounded-full bg-peach/40 blur-3xl dark:bg-orchid/30"
           aria-hidden
         />
         <img
@@ -54,8 +54,8 @@ export default function About({ index }) {
             <div className="mt-4 grid gap-3 sm:grid-cols-3">
               {t.about.languages.map((l, i) => (
                 <div key={l.name} className={`rounded-2xl px-4 py-3 ${tone(i).soft}`}>
-                  <p className="font-medium text-fg">{l.name}</p>
-                  <p className="mt-0.5 font-mono text-xs text-fg/70">{l.level}</p>
+                  <p className="font-medium">{l.name}</p>
+                  <p className="mt-0.5 font-mono text-xs opacity-75">{l.level}</p>
                 </div>
               ))}
             </div>

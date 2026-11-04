@@ -17,7 +17,7 @@ export default function Skills({ index }) {
             <Reveal key={s.group} delay={i * 0.05} className="card relative overflow-hidden p-6">
               <span className={`absolute inset-x-0 top-0 h-1.5 ${c.solid}`} aria-hidden />
               <h3 className="flex items-center gap-3 font-display font-semibold">
-                <span className={`flex h-9 w-9 items-center justify-center rounded-lg text-fg ${c.soft}`}>
+                <span className={`flex h-9 w-9 items-center justify-center rounded-lg ${c.soft}`}>
                   <Icon size={18} />
                 </span>
                 {s.group}

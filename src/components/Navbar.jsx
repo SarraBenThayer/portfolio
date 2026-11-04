@@ -5,7 +5,7 @@ import { usePreferences } from '../context/Preferences'
 import { tone } from '../palette'
 
 // Keep in sync with the SECTIONS order in App.jsx
-export const SECTIONS = ['about', 'education', 'experience', 'projects', 'skills', 'activities', 'contact']
+export const SECTIONS = ['about', 'education', 'experience', 'projects', 'skills', 'activities', 'resume', 'contact']
 
 // Returns the id of the section currently in view (the last one whose top
 // has passed ~35% of the viewport height), or null while on the hero.
@@ -50,7 +50,7 @@ function ProgressBar() {
   return (
     <motion.div
       style={{ scaleX }}
-      className="absolute inset-x-0 top-0 h-[3px] origin-left bg-gradient-to-r from-coral via-mustard via-50% to-lagoon"
+      className="absolute inset-x-0 top-0 h-[3px] origin-left bg-gradient-to-r from-orchid via-peach via-50% to-pistachio"
       aria-hidden
     />
   )
@@ -94,8 +94,8 @@ export default function Navbar() {
                 <a
                   href={`#${id}`}
                   aria-current={isActive ? 'true' : undefined}
-                  className={`relative isolate block whitespace-nowrap rounded-full px-2 py-1.5 text-xs transition-colors lg:px-3 lg:text-sm ${
-                    isActive ? 'font-medium text-fg' : 'text-muted hover:text-fg'
+                  className={`relative isolate block whitespace-nowrap rounded-full px-1 py-1.5 text-xs transition-colors min-[900px]:px-2 lg:px-3 lg:text-sm ${
+                    isActive ? 'font-medium text-ink' : 'text-muted hover:text-fg'
                   }`}
                 >
                   {isActive && (

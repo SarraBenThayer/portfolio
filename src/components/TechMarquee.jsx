@@ -4,6 +4,7 @@ const TOOLS = [
   { name: 'Apache Spark', slug: 'apachespark' },
   { name: 'Kafka', slug: 'apachekafka' },
   { name: 'Databricks', slug: 'databricks' },
+  { name: 'Snowflake', slug: 'snowflake' },
   { name: 'PostgreSQL', slug: 'postgresql' },
   { name: 'Neo4j', slug: 'neo4j' },
   { name: 'MongoDB', slug: 'mongodb' },
@@ -24,7 +25,7 @@ function Row({ hidden }) {
       {TOOLS.map((tool) => (
         <li key={tool.slug} className="group flex items-center gap-3 text-muted transition-colors hover:text-fg">
           <img
-            src={`https://cdn.simpleicons.org/${tool.slug}/8a94a6`}
+            src={`https://cdn.simpleicons.org/${tool.slug}/CE7DA5`}
             alt=""
             width={28}
             height={28}
