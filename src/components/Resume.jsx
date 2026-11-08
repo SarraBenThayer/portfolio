@@ -38,7 +38,7 @@ export default function Resume({ index }) {
           rel="noreferrer"
           className="card flex items-center gap-4 p-5 md:hidden"
         >
-          <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-orchid text-ink">
+          <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-accent to-accent-2 text-bg shadow-md shadow-accent-2/20">
             <FileText size={22} />
           </span>
           <span className="text-sm text-muted">{t.ui.resumeMobile}</span>

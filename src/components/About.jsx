@@ -2,7 +2,7 @@ import { Languages, MapPin } from 'lucide-react'
 import { usePreferences } from '../context/Preferences'
 import { profile } from '../data/content'
 import Section, { Reveal } from './Section'
-import { tone } from '../palette'
+import { hue } from '../palette'
 
 function Photo() {
   return (
@@ -13,9 +13,9 @@ function Photo() {
         aria-hidden
       />
       {/* portrait card: the cut-out stands on the bottom edge */}
-      <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-line bg-gradient-to-b from-orchid via-orchid/80 to-peach">
+      <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-line bg-gradient-to-b from-orchid via-orchid/80 to-accent-2/80">
         <div
-          className="absolute left-1/2 top-1/4 h-48 w-48 -translate-x-1/2 rounded-full bg-peach/40 blur-3xl dark:bg-orchid/30"
+          className="absolute left-1/2 top-1/4 h-48 w-48 -translate-x-1/2 rounded-full bg-accent-2/30 blur-3xl dark:bg-accent-2/35"
           aria-hidden
         />
         <img
@@ -53,7 +53,7 @@ export default function About({ index }) {
             </h3>
             <div className="mt-4 grid gap-3 sm:grid-cols-3">
               {t.about.languages.map((l, i) => (
-                <div key={l.name} className={`rounded-2xl px-4 py-3 ${tone(i).soft}`}>
+                <div key={l.name} className={`rounded-2xl px-4 py-3 ${hue(i).soft}`}>
                   <p className="font-medium">{l.name}</p>
                   <p className="mt-0.5 font-mono text-xs opacity-75">{l.level}</p>
                 </div>

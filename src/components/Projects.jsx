@@ -15,9 +15,9 @@ import {
   X,
 } from 'lucide-react'
 import { usePreferences } from '../context/Preferences'
-import Section, { Reveal, Tag } from './Section'
+import Section, { DrawBar, Reveal, Tag } from './Section'
 import ArchitectureMap from './ArchitectureMap'
-import { tone } from '../palette'
+import { hue, tone } from '../palette'
 
 // Header icon per project id
 const PROJECT_ICONS = {
@@ -39,18 +39,19 @@ function ProjectCard({ project, index, t, onOpen }) {
   const icons = PROJECT_ICONS[project.id] || {}
   const Main = icons.main || Activity
   const c = tone(index)
+  const h = hue(index)
   const extra = project.tags.length - MAX_CARD_TAGS
 
   return (
     <Reveal delay={(index % 2) * 0.08} className="h-full">
-      <article className="card group relative flex h-full flex-col overflow-hidden p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/10 sm:p-8">
-        <span className={`absolute inset-x-0 top-0 h-1.5 ${c.solid}`} aria-hidden />
+      <article className={`card group relative flex h-full flex-col overflow-hidden p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:p-8 ${h.glow}`}>
+        <DrawBar className={h.solid} delay={0.15} />
 
         <div className="flex items-center justify-between">
-          <span className={`flex h-12 w-12 items-center justify-center rounded-xl ${c.soft}`}>
+          <span className={`flex h-12 w-12 items-center justify-center rounded-xl transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-110 ${h.soft}`}>
             <Main size={22} />
           </span>
-          <span className={`rounded-full px-3 py-1 font-mono text-xs text-fg ${c.tint}`}>
+          <span className={`rounded-full px-3 py-1 font-mono text-xs ${h.tint} ${h.text}`}>
             {String(index + 1).padStart(2, '0')}
           </span>
         </div>
@@ -119,7 +120,7 @@ function ProjectModal({ project, index, t, onClose }) {
   zoomedRef.current = zoomed
   const icons = PROJECT_ICONS[project.id] || {}
   const Main = icons.main || Activity
-  const c = tone(index)
+  const h = hue(index)
 
   // Esc closes the enlarged diagram first, then the window; lock page scroll
   useEffect(() => {
@@ -157,7 +158,7 @@ function ProjectModal({ project, index, t, onClose }) {
         transition={{ duration: 0.25, ease: 'easeOut' }}
         className="relative max-h-[94vh] w-full max-w-[min(90rem,96vw)] overflow-y-auto rounded-3xl border border-line bg-panel shadow-2xl"
       >
-        <span className={`sticky top-0 z-10 block h-1.5 w-full ${c.solid}`} aria-hidden />
+        <span className={`sticky top-0 z-10 block h-1.5 w-full ${h.solid}`} aria-hidden />
 
         <button
           ref={closeRef}
@@ -171,10 +172,10 @@ function ProjectModal({ project, index, t, onClose }) {
         <div className="px-6 pb-10 pt-8 sm:px-14 sm:pb-14 sm:pt-12 xl:px-20">
           {/* header */}
           <div className="flex items-center gap-4 pr-12">
-            <span className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl ${c.soft}`}>
+            <span className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl ${h.soft}`}>
               <Main size={24} />
             </span>
-            <span className={`rounded-full px-3 py-1 font-mono text-xs text-fg ${c.tint}`}>
+            <span className={`rounded-full px-3 py-1 font-mono text-xs ${h.tint} ${h.text}`}>
               {String(index + 1).padStart(2, '0')}
             </span>
           </div>
@@ -227,8 +228,8 @@ function ProjectModal({ project, index, t, onClose }) {
                 {project.workflow.map((step, i) => (
                   <li key={step.title} className="relative">
                     <span
-                      className={`absolute -left-14 top-0 flex h-10 w-10 items-center justify-center rounded-full font-display text-sm font-bold text-ink ring-4 ring-panel ${
-                        tone(i).solid
+                      className={`absolute -left-14 top-0 flex h-10 w-10 items-center justify-center rounded-full font-display text-sm font-bold ring-4 ring-panel ${
+                        hue(i).num
                       }`}
                     >
                       {i + 1}
@@ -248,9 +249,9 @@ function ProjectModal({ project, index, t, onClose }) {
             <section className="mt-14">
               <Label>{t.ui.highlights}</Label>
               <ul className="mt-6 grid gap-4 sm:grid-cols-2">
-                {project.points.map((p) => (
+                {project.points.map((p, i) => (
                   <li key={p} className="flex gap-4 rounded-2xl border border-line bg-bg/50 p-5 leading-relaxed text-muted">
-                    <span className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-lg ${c.soft}`}>
+                    <span className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-lg ${hue(i).soft}`}>
                       <Check size={15} />
                     </span>
                     <span className="pt-0.5">{p}</span>
@@ -265,9 +266,9 @@ function ProjectModal({ project, index, t, onClose }) {
             <section className="mt-14">
               <Label>{t.ui.impact}</Label>
               <ul className="mt-6 grid gap-4 sm:grid-cols-2">
-                {project.impact.map((v) => (
-                  <li key={v} className={`flex gap-4 rounded-2xl p-5 leading-relaxed text-fg ${c.tint}`}>
-                    <TrendingUp size={18} className="mt-0.5 shrink-0" />
+                {project.impact.map((v, i) => (
+                  <li key={v} className={`flex gap-4 rounded-2xl p-5 leading-relaxed text-fg ${hue(i).tint}`}>
+                    <TrendingUp size={18} className={`mt-0.5 shrink-0 ${hue(i).text}`} />
                     {v}
                   </li>
                 ))}
@@ -326,7 +327,6 @@ export default function Projects({ index }) {
       index={index}
       eyebrow={t.nav.projects}
       title={t.ui.projectsTitle}
-      subtitle={t.ui.projectsSub}
     >
       <div className="grid gap-6 md:grid-cols-2">
         {projects.map((p, i) => (

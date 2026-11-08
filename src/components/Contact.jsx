@@ -4,14 +4,14 @@ import { profile } from '../data/content'
 import Section, { Reveal } from './Section'
 import EmailMenu from './EmailMenu'
 import ContactForm from './ContactForm'
-import { tone } from '../palette'
+import { hue } from '../palette'
 
 const rowClass =
   'flex w-full items-center gap-4 rounded-xl border border-transparent p-2 text-left transition-colors hover:border-line hover:bg-bg/50'
 
 function IconBox({ Icon, i = 0 }) {
   return (
-    <span className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ${tone(i).soft}`}>
+    <span className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ${hue(i).soft}`}>
       <Icon size={18} />
     </span>
   )
@@ -28,9 +28,9 @@ export default function Contact({ index }) {
 
   return (
     <Section id="contact" index={index} eyebrow={t.nav.contact} title={t.ui.contactTitle} subtitle={t.contact.text}>
-      <div className="grid gap-6 lg:grid-cols-[1fr_1.4fr]">
+      <div className="grid grid-cols-[minmax(0,1fr)] gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)]">
         <Reveal className="card relative p-6 sm:p-8">
-          <div className="pointer-events-none absolute -left-16 -top-16 h-48 w-48 rounded-full bg-peach/50 blur-3xl dark:bg-orchid/25" aria-hidden />
+          <div className="pointer-events-none absolute -left-16 -top-16 h-48 w-48 rounded-full bg-orchid/35 blur-3xl dark:bg-accent-2/25" aria-hidden />
           <div className="relative space-y-2">
             <EmailMenu className={rowClass} ariaLabel={t.ui.copyEmail}>
               <IconBox Icon={Mail} />

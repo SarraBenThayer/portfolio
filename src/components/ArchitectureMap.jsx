@@ -1,6 +1,6 @@
 import { Fragment } from 'react'
 import { ArrowRight, Box } from 'lucide-react'
-import { tone } from '../palette'
+import { hue } from '../palette'
 
 // Static map of a system's components, grouped by layer. It shows WHAT the
 // system is made of; the numbered workflow shows HOW it runs.
@@ -9,7 +9,7 @@ export default function ArchitectureMap({ layers, note }) {
     <div>
       <div className="flex flex-col items-stretch gap-3 lg:flex-row">
         {layers.map((l, i) => {
-          const c = tone(i)
+          const c = hue(i)
           return (
             <Fragment key={l.layer}>
               <div className={`min-w-0 flex-1 rounded-2xl border-t-4 bg-bg/60 p-5 ${c.border}`}>

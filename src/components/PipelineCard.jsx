@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { FileSearch, Layers, Network, RefreshCw, ShieldCheck } from 'lucide-react'
-import { tone } from '../palette'
+import { hue } from '../palette'
 
 const DEFAULT_ICONS = [FileSearch, Network, ShieldCheck, Layers]
 const STEP_MS = 1400
@@ -20,15 +20,15 @@ export default function PipelineCard({ data, icons = DEFAULT_ICONS }) {
       {/* window header */}
       <div className="mb-5 flex items-center justify-between gap-3">
         <div className="flex items-center gap-1.5">
-          <span className="h-2.5 w-2.5 rounded-full bg-orchid" />
-          <span className="h-2.5 w-2.5 rounded-full bg-peach" />
-          <span className="h-2.5 w-2.5 rounded-full bg-pistachio" />
+          <span className="h-2.5 w-2.5 rounded-full bg-accent-2" />
+          <span className="h-2.5 w-2.5 rounded-full bg-accent/60" />
+          <span className="h-2.5 w-2.5 rounded-full bg-accent/30" />
         </div>
         <span className="truncate font-mono text-xs text-faint">{data.title}</span>
         <span className="flex shrink-0 items-center gap-1.5 font-mono text-xs text-accent">
           <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent-2 opacity-60" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-accent-2" />
           </span>
           {data.status}
         </span>
@@ -38,7 +38,7 @@ export default function PipelineCard({ data, icons = DEFAULT_ICONS }) {
         {/* vertical connector */}
         <span className="absolute bottom-6 left-[1.4rem] top-6 w-px bg-line" aria-hidden />
         <motion.span
-          className="absolute left-[1.4rem] w-0.5 -translate-x-[0.5px] bg-gradient-to-b from-pistachio via-peach to-orchid"
+          className="absolute left-[1.4rem] w-0.5 -translate-x-[0.5px] bg-gradient-to-b from-accent/20 via-accent/60 to-accent"
           style={{ top: '1.5rem' }}
           animate={{ height: `${(active / (data.steps.length - 1)) * 100}%` }}
           transition={{ duration: 0.6, ease: 'easeInOut' }}
@@ -49,7 +49,7 @@ export default function PipelineCard({ data, icons = DEFAULT_ICONS }) {
           const Icon = icons[i % icons.length]
           const isActive = i === active
           const isDone = i < active
-          const c = tone(i)
+          const c = hue(i)
           return (
             <li
               key={step.name}
@@ -85,7 +85,7 @@ export default function PipelineCard({ data, icons = DEFAULT_ICONS }) {
 
       {data.footer && (
         <p className="mt-4 flex items-center gap-2 border-t border-line pt-4 font-mono text-[11px] text-faint">
-          <RefreshCw size={12} className="shrink-0 text-accent-2" /> {data.footer}
+          <RefreshCw size={12} className="shrink-0 text-accent" /> {data.footer}
         </p>
       )}
     </div>

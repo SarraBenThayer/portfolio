@@ -15,7 +15,7 @@
   --muted: 101 83 115;
   --faint: 118 102 133;
   --accent: 154 63 112;    /* deep orchid — readable on peach white */
-  --accent-2: 73 54 87;    /* plum */
+  --accent-2: 196 40 66;   /* red #C42842 — readable on peach white */
 }
 
 .dark {
@@ -26,7 +26,7 @@
   --muted: 201 198 208;
   --faint: 169 157 181;
   --accent: 206 125 165;   /* orchid #CE7DA5 */
-  --accent-2: 190 229 191; /* pistachio #BEE5BF */
+  --accent-2: 240 84 104;  /* red #F05468 */
   color-scheme: dark;
 }
 
@@ -51,13 +51,13 @@
   .text-gradient {
     @apply bg-gradient-to-r from-accent to-accent-2 bg-clip-text text-transparent;
   }
-  /* light: deep orchid → plum (large text only) */
+  /* light: deep orchid → red (large text only) */
   .text-gradient {
-    background-image: linear-gradient(to right, #9a3f70, #493657);
+    background-image: linear-gradient(to right, #9a3f70, #c42842);
   }
-  /* dark: the raw palette is readable — orchid → peach → pistachio */
+  /* dark: orchid → red */
   .dark .text-gradient {
-    background-image: linear-gradient(to right, #ce7da5, #ffd1ba, #bee5bf);
+    background-image: linear-gradient(to right, #ce7da5, #f05468);
   }
   .card {
     @apply rounded-2xl border border-line bg-panel/70 backdrop-blur-sm;
@@ -66,7 +66,7 @@
     @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-medium transition-all duration-200;
   }
   .btn-primary {
-    @apply btn bg-accent text-bg hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/20;
+    @apply btn bg-gradient-to-r from-accent to-accent-2 text-bg hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent-2/25;
   }
   .btn-ghost {
     @apply btn border border-line bg-panel/60 text-fg hover:-translate-y-0.5 hover:border-accent/50;

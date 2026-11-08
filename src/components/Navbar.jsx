@@ -50,7 +50,7 @@ function ProgressBar() {
   return (
     <motion.div
       style={{ scaleX }}
-      className="absolute inset-x-0 top-0 h-[3px] origin-left bg-gradient-to-r from-orchid via-peach via-50% to-pistachio"
+      className="absolute inset-x-0 top-0 h-[3px] origin-left bg-gradient-to-r from-accent to-accent-2"
       aria-hidden
     />
   )
@@ -95,7 +95,7 @@ export default function Navbar() {
                   href={`#${id}`}
                   aria-current={isActive ? 'true' : undefined}
                   className={`relative isolate block whitespace-nowrap rounded-full px-1 py-1.5 text-xs transition-colors min-[900px]:px-2 lg:px-3 lg:text-sm ${
-                    isActive ? 'font-medium text-ink' : 'text-muted hover:text-fg'
+                    isActive ? 'font-medium text-bg' : 'text-muted hover:text-fg'
                   }`}
                 >
                   {isActive && (

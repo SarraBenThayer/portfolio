@@ -13,9 +13,9 @@ function Avatar() {
   return (
     <div className="relative mx-auto h-36 w-36 sm:h-44 sm:w-44">
       {/* glow */}
-      <div className="absolute -inset-4 rounded-full bg-gradient-to-br from-orchid/50 via-peach/40 to-pistachio/50 blur-2xl" aria-hidden />
+      <div className="absolute -inset-4 rounded-full bg-gradient-to-br from-orchid/50 to-accent-2/40 blur-2xl" aria-hidden />
       {/* gradient ring */}
-      <div className="relative h-full w-full rounded-full bg-gradient-to-br from-orchid via-peach to-pistachio p-[4px]">
+      <div className="relative h-full w-full rounded-full bg-gradient-to-br from-orchid to-accent-2 p-[4px]">
         {profile.avatar ? (
           <img
             src={profile.avatar}
@@ -23,7 +23,7 @@ function Avatar() {
             className="h-full w-full rounded-full object-cover object-[50%_30%]"
           />
         ) : (
-          <div className="flex h-full w-full items-center justify-center rounded-full bg-gradient-to-br from-orchid via-peach to-pistachio">
+          <div className="flex h-full w-full items-center justify-center rounded-full bg-gradient-to-br from-orchid to-plum">
             <span className="font-display text-5xl font-bold text-bg sm:text-6xl">SB</span>
           </div>
         )}
@@ -41,12 +41,12 @@ export default function Hero() {
       {/* background */}
       <div className="bg-grid pointer-events-none absolute inset-0" aria-hidden />
       <div
-        className="pointer-events-none absolute -top-40 left-1/2 h-[32rem] w-[48rem] -translate-x-1/2 rounded-full bg-gradient-to-r from-peach/70 via-orchid/20 to-peach/70 dark:from-orchid/25 dark:via-plum/60 dark:to-orchid/25 blur-3xl"
+        className="pointer-events-none absolute -top-40 left-1/2 h-[32rem] w-[48rem] -translate-x-1/2 rounded-full bg-gradient-to-r from-orchid/40 via-accent-2/15 to-orchid/40 dark:from-orchid/35 dark:via-accent-2/20 dark:to-orchid/35 blur-3xl"
         aria-hidden
       />
-      <div className="pointer-events-none absolute left-[8%] top-1/3 h-56 w-56 rounded-full bg-orchid/15 blur-3xl dark:bg-orchid/20" aria-hidden />
-      <div className="pointer-events-none absolute right-[6%] top-1/4 h-64 w-64 rounded-full bg-peach/50 blur-3xl dark:bg-orchid/35" aria-hidden />
-      <div className="pointer-events-none absolute bottom-10 left-1/3 h-48 w-72 rounded-full bg-peach/50 blur-3xl dark:bg-plum" aria-hidden />
+      <div className="pointer-events-none absolute left-[8%] top-1/3 h-56 w-56 rounded-full bg-accent-2/15 blur-3xl dark:bg-accent-2/25" aria-hidden />
+      <div className="pointer-events-none absolute right-[6%] top-1/4 h-64 w-64 rounded-full bg-orchid/35 blur-3xl dark:bg-orchid/40" aria-hidden />
+      <div className="pointer-events-none absolute bottom-10 left-1/3 h-48 w-72 rounded-full bg-orchid/25 blur-3xl dark:bg-accent-2/20" aria-hidden />
 
       <motion.div key={lang} initial="hidden" animate="show" className="container-page relative text-center">
         <motion.div variants={fadeUp} custom={0}>
@@ -56,9 +56,9 @@ export default function Hero() {
         <motion.p
           variants={fadeUp}
           custom={1}
-          className="mt-8 inline-flex items-center gap-2 rounded-full bg-orchid px-4 py-1.5 font-mono text-sm font-medium text-ink"
+          className="mt-8 inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/15 px-4 py-1.5 font-mono text-sm font-medium text-accent"
         >
-          <span className="h-2 w-2 rounded-full bg-ink" />
+          <span className="h-2 w-2 animate-pulse rounded-full bg-accent-2" />
           {h.greeting}
         </motion.p>
 
@@ -81,7 +81,7 @@ export default function Hero() {
         <motion.div variants={fadeUp} custom={4} className="mt-10 flex flex-wrap items-center justify-center gap-4">
           <a
             href="#contact"
-            className="rounded-full bg-accent px-7 py-3 text-sm font-semibold text-bg transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/20"
+            className="rounded-full bg-gradient-to-r from-accent to-accent-2 px-7 py-3 text-sm font-semibold text-bg transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent-2/25"
           >
             {h.ctaContact}
           </a>

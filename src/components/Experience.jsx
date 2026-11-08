@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, animate, motion, useInView, useReducedMotion } from 'framer-motion'
 import {
   ArrowRight,
   Briefcase,
@@ -13,10 +13,10 @@ import {
   X,
 } from 'lucide-react'
 import { usePreferences } from '../context/Preferences'
-import Section, { Reveal, Tag } from './Section'
+import Section, { DrawBar, Reveal, Tag } from './Section'
 import PipelineCard from './PipelineCard'
 import Lightbox from './Lightbox'
-import { tone } from '../palette'
+import { hue, tone } from '../palette'
 
 // Screenshots of an agent's output, shown under its description
 function StepImages({ images, onZoom, enlargeLabel }) {
@@ -50,7 +50,7 @@ function ConfidentialBadge({ t }) {
   return (
     <span
       title={t.ui.confidentialHint}
-      className="inline-flex items-center gap-1.5 rounded-full border border-orchid/60 bg-orchid/15 px-3 py-1.5 font-mono text-xs text-fg"
+      className="inline-flex items-center gap-1.5 rounded-full border border-accent/40 bg-accent/10 px-3 py-1.5 font-mono text-xs text-fg"
     >
       <Lock size={12} />
       {t.ui.confidential}
@@ -62,16 +62,65 @@ function Label({ children }) {
   return <p className="font-mono text-xs uppercase tracking-widest text-accent">{children}</p>
 }
 
+// Counts up to the number inside a value like "4", "100%", "~92%" or "<1s" once visible.
+function CountUp({ value }) {
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, margin: '-40px' })
+  const reduce = useReducedMotion()
+  const match = /^(\D*)(\d+)(.*)$/.exec(value)
+  const [n, setN] = useState(match && !reduce ? 0 : null)
+
+  useEffect(() => {
+    if (!match || reduce || !inView) return
+    const controls = animate(0, Number(match[2]), {
+      duration: 1.2,
+      ease: 'easeOut',
+      onUpdate: (v) => setN(Math.round(v)),
+    })
+    return () => controls.stop()
+  }, [inView]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  return <span ref={ref}>{match && n !== null ? `${match[1]}${n}${match[3]}` : value}</span>
+}
+
+// Same motion for every list: items arrive one after another.
+const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.09 } } }
+const slideIn = { hidden: { opacity: 0, x: -18 }, show: { opacity: 1, x: 0, transition: { duration: 0.4 } } }
+const popIn = {
+  hidden: { opacity: 0, scale: 0.8, y: 8 },
+  show: { opacity: 1, scale: 1, y: 0, transition: { type: 'spring', stiffness: 260, damping: 18 } },
+}
+
 function Metrics({ metrics }) {
   return (
-    <dl className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-      {metrics.map((m, i) => (
-        <div key={m.label} className={`flex flex-col rounded-2xl border-t-4 bg-bg/60 px-5 py-5 ${tone(i).border}`}>
-          <dd className="font-display text-3xl font-bold text-gradient sm:text-4xl">{m.value}</dd>
-          <dt className="mt-2 text-sm leading-snug text-muted">{m.label}</dt>
-        </div>
-      ))}
-    </dl>
+    <motion.dl
+      variants={stagger}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, margin: '-60px' }}
+      className="grid grid-cols-2 gap-4 lg:grid-cols-4"
+    >
+      {metrics.map((m, i) => {
+        const h = hue(i)
+        return (
+          <motion.div
+            key={m.label}
+            variants={popIn}
+            className={`group relative flex flex-col overflow-hidden rounded-2xl border border-line bg-bg/60 px-5 pb-5 pt-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${h.glow}`}
+          >
+            <DrawBar className={h.bar} delay={0.2 + i * 0.12} />
+            <span
+              className={`pointer-events-none absolute -right-6 -top-6 h-20 w-20 rounded-full opacity-20 blur-2xl transition-opacity duration-300 group-hover:opacity-50 ${h.bar}`}
+              aria-hidden
+            />
+            <dd className={`font-display text-3xl font-bold sm:text-4xl ${h.text}`}>
+              <CountUp value={m.value} />
+            </dd>
+            <dt className="mt-2 text-sm leading-snug text-muted">{m.label}</dt>
+          </motion.div>
+        )
+      })}
+    </motion.dl>
   )
 }
 
@@ -81,7 +130,6 @@ function ExperienceModal({ job, index, t, onClose }) {
   const [zoomed, setZoomed] = useState(null)
   const zoomedRef = useRef(null)
   zoomedRef.current = zoomed
-  const c = tone(index)
 
   // Esc closes the enlarged image first, then the window
   useEffect(() => {
@@ -119,7 +167,7 @@ function ExperienceModal({ job, index, t, onClose }) {
         transition={{ duration: 0.25, ease: 'easeOut' }}
         className="relative max-h-[94vh] w-full max-w-[min(90rem,96vw)] overflow-y-auto rounded-3xl border border-line bg-panel shadow-2xl"
       >
-        <span className={`sticky top-0 z-10 block h-1.5 w-full ${c.solid}`} aria-hidden />
+        <span className={`sticky top-0 z-10 block h-1.5 w-full ${hue(index).solid}`} aria-hidden />
         <button
           ref={closeRef}
           onClick={onClose}
@@ -164,8 +212,8 @@ function ExperienceModal({ job, index, t, onClose }) {
               {job.points.map((p, i) => (
                 <li key={p.label} className="relative">
                   <span
-                    className={`absolute -left-14 top-0 flex h-10 w-10 items-center justify-center rounded-full font-display text-sm font-bold text-ink ring-4 ring-panel ${
-                      tone(i).solid
+                    className={`absolute -left-14 top-0 flex h-10 w-10 items-center justify-center rounded-full font-display text-sm font-bold ring-4 ring-panel ${
+                      hue(i).num
                     }`}
                   >
                     {i + 1}
@@ -203,7 +251,7 @@ function ExperienceCard({ job, index, t, onOpen }) {
   const c = tone(index)
   return (
     <Reveal className="card relative overflow-hidden px-6 py-9 sm:px-12 sm:py-12">
-      <span className={`absolute inset-x-0 top-0 h-1.5 ${c.solid}`} aria-hidden />
+      <DrawBar className={hue(index).solid} delay={0.15} />
 
       {/* header */}
       <div className="flex flex-wrap items-start justify-between gap-4">
@@ -238,18 +286,24 @@ function ExperienceCard({ job, index, t, onOpen }) {
         {job.delivered && (
           <div>
             <Label>{t.ui.delivered}</Label>
-            <ul className="mt-6 space-y-5">
+            <motion.ul
+              variants={stagger}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: '-60px' }}
+              className="mt-6 space-y-5"
+            >
               {job.delivered.map((d, i) => (
-                <li key={d} className="flex gap-4">
+                <motion.li key={d} variants={slideIn} className="group flex gap-4">
                   <span
-                    className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${tone(i).soft}`}
+                    className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg transition-transform duration-300 group-hover:rotate-12 group-hover:scale-110 ${hue(i).chip}`}
                   >
                     <Sparkles size={15} />
                   </span>
                   <p className="pt-1 leading-relaxed text-fg/90">{d}</p>
-                </li>
+                </motion.li>
               ))}
-            </ul>
+            </motion.ul>
           </div>
         )}
 
@@ -257,13 +311,25 @@ function ExperienceCard({ job, index, t, onOpen }) {
           {job.strengths && (
             <>
               <Label>{t.ui.strengths}</Label>
-              <div className="mt-6 flex flex-wrap gap-2.5">
+              <motion.div
+                variants={stagger}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, margin: '-60px' }}
+                className="mt-6 flex flex-wrap gap-2.5"
+              >
                 {job.strengths.map((s, i) => (
-                  <span key={s} className={`rounded-full px-4 py-2 text-sm font-medium ${tone(i).soft}`}>
+                  <motion.span
+                    key={s}
+                    variants={popIn}
+                    whileHover={{ y: -3 }}
+                    className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium text-fg ${hue(i).pill}`}
+                  >
+                    <span className={`h-2 w-2 rounded-full ${hue(i).dot}`} aria-hidden />
                     {s}
-                  </span>
+                  </motion.span>
                 ))}
-              </div>
+              </motion.div>
             </>
           )}
 
@@ -291,8 +357,8 @@ export default function Experience({ index }) {
         {t.experience.map((job, i) => (
           <li key={job.id} className="relative">
             <span
-              className={`absolute -left-[2.05rem] top-9 flex h-8 w-8 items-center justify-center rounded-full text-ink ring-4 ring-bg sm:-left-[4.05rem] ${
-                tone(i).solid
+              className={`absolute -left-[2.05rem] top-9 flex h-8 w-8 items-center justify-center rounded-full ring-4 ring-bg sm:-left-[4.05rem] ${
+                hue(i).num
               }`}
             >
               <Briefcase size={14} />

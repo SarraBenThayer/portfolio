@@ -28,7 +28,7 @@ export function BackToTop() {
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           aria-label={t.ui.backToTop}
           title={t.ui.backToTop}
-          className="fixed bottom-6 right-6 z-40 flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-orchid via-peach to-pistachio text-ink shadow-lg shadow-black/20 transition-transform hover:-translate-y-1"
+          className="fixed bottom-6 right-6 z-40 flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-accent to-accent-2 text-bg shadow-lg shadow-black/20 transition-transform hover:-translate-y-1"
         >
           <ArrowUp size={20} />
         </motion.button>
@@ -48,8 +48,8 @@ export default function Footer() {
 
   return (
     <footer className="relative mt-10 overflow-x-clip border-t border-line">
-      <div className="pointer-events-none absolute -bottom-24 left-1/4 h-56 w-96 rounded-full bg-peach/30 blur-3xl dark:bg-orchid/15" aria-hidden />
-      <div className="pointer-events-none absolute -bottom-24 right-1/4 h-56 w-80 rounded-full bg-orchid/15 blur-3xl dark:bg-plum" aria-hidden />
+      <div className="pointer-events-none absolute -bottom-24 left-1/4 h-56 w-96 rounded-full bg-orchid/25 blur-3xl dark:bg-orchid/20" aria-hidden />
+      <div className="pointer-events-none absolute -bottom-24 right-1/4 h-56 w-80 rounded-full bg-accent-2/15 blur-3xl dark:bg-accent-2/20" aria-hidden />
 
       <div className="container-page relative py-14">
         <div className="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr]">
